@@ -1,0 +1,48 @@
+import tensorflow
+import pandas as pd
+import numpy as np
+import sklearn
+from sklearn import linear_model
+import pickle
+import matplotlib.pyplot as pyplot
+from matplotlib import style
+
+
+data = pd.read_csv('student-mat.csv', sep=";")
+data["internet"] = data["internet"].map({"yes": 1, "no": 0})
+data = data[["G1", "G2", "G3", "internet", "failures", "studytime", "absences", "freetime", "health"]]
+forecast = "G3"
+X = np.array(data.drop([forecast], 1))
+y = np.array(data[forecast])
+
+X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
+
+"""
+best = 0
+for _ in range(50):
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
+    linear = linear_model.LinearRegression()
+    linear.fit(X_train, y_train)
+    acc = linear.score(X_test, y_test)
+    print(acc)
+    if acc > best:
+        best = acc
+        with open("studentgradesmodel.pickle", "wb") as file:
+            pickle.dump(linear, file)"""
+
+pickle_in = open("studentgradesmodel.pickle", "rb")
+linear = pickle.load(pickle_in)
+
+print(f'{linear.coef_} are coefficients' + f' and {linear.intercept_} is intercept of our hypotheses')
+
+predictions = linear.predict(X_test)
+
+for x in range(len(predictions)):
+    print(predictions[x], y_test[x])
+
+xaxis = "G1"
+style.use("fast")
+pyplot.scatter(data[xaxis], data["G3"])
+pyplot.xlabel(xaxis)
+pyplot.ylabel('Students Final Grades')
+pyplot.show()

@@ -7,7 +7,7 @@ predictions[x] is machine's prediction based on X_test features(attributes) and 
 
 Where i got data: https://archive.ics.uci.edu/ml/datasets/student%2Bperformance
 
-Helpful Sources:
+Helpful Resources:
 
  https://matplotlib.org/3.1.1/gallery/style_sheets/style_sheets_reference.html
  https://matplotlib.org/3.2.2/api/pyplot_summary.html

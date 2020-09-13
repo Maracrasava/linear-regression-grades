@@ -25,7 +25,7 @@ linear.fit(X_train, y_train)
 acc = linear.score(X_test, y_test)
 print(acc)
 
-# print(f'{linear.coef_} are coefficients' + f' and {linear.intercept_} is intercept of our hypotheses')
+# print(f'{linear.coef_} are coefficients' + f' and {linear.intercept_} is intercept of my hypotheses')
 
 predictions = linear.predict(X_test)
 
